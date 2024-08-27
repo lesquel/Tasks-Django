@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Lista de tareas Terminadas</h1>
+
+<!-- <table class="table table-striped table-hover table-bordered table-dark">
+    <tr>
+        <th>Titulo</th>
+        <th>Descripción</th>
+        <th>Usuario</th>
+        <th>Fecha de finalización</th>
+        <th>Detalles</th>
+    </tr>
+    {% if tasks %}
+
+    {% for task in tasks %}
+        {% if task.important %}
+            <strong>
+                <tr>
+                    <td>{{ task.title }}</td>
+                    <td>{{ task.description }}</td>
+                    <td>{{ task.user }}</td>
+                    <td>{{ task.detecompleted }}</td>
+                    <td><a href="{% url 'taskDetails' task.id %} class="btn btn-secondary"">Ver detalles</a></td>
+                </tr>
+            </strong>
+        {% else %}
+            <tr>
+                <td>{{ task.title }}</td>
+                <td>{{ task.description }}</td>
+                <td>{{ task.user }}</td>
+                <td>{{ task.detecompleted|date:"d/m/Y" }}</td>
+                <td><a href="{% url 'taskDetails' task.id %}" class="btn btn-secondary">Ver detalles</a></td>
+            </tr>
+        {% endif %}
+    {% endfor %}
+    {% else %}
+    <tr>
+        <td colspan="5" class="text-center">No hay tareas <a type="button" class="btn btn-secondary"<a class="nav-link" href="{% url 'createTask' %}">Crear tarea</a></td>
+    </tr>
+    {% endif %}
+</table> -->
+
+<div class="d-grid gap-2 d-md-flex justify-content-md-center">
+    {% if tasks %}
+    {% for task in tasks %}
+        {% if task.important %}
+            <div style="width: 350px;" class="mycard card bg-dark text-white border border-body-tertiary rounded-3 shadow-sm">
+                <div class=" card-body">
+                    <h5 class="card-title">Titulo: {{ task.title }}</h5>
+                    <p class="card-text mt-2">{{ task.description }}</p>
+                    <p class="card-text">Creado por: {{ task.user }}</p>
+                    <p class="card-text">Fecha de finalización: {{ task.detecompleted|date:"d/m/Y" }}</p>
+                    <a href="{% url 'taskDetails' task.id %}" class="btn btn-warning">Ver detalles</a>
+                </div>
+            </div>
+        {% else %}
+            <div style="width: 350px;" class="mycard    card bg-dark text-white border border-body-tertiary rounded-3 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Titulo: {{ task.title }}</h5>
+                    <p class="card-text mt-2">{{ task.description }}</p>
+                    <p class="card-text">Creado por: {{ task.user }}</p>
+                    <p class="card-text">Fecha de finalización: {{ task.detecompleted|date:"d/m/Y" }}</p>
+                    <a href="{% url 'taskDetails' task.id %}" class="btn btn-secondary">Ver detalles</a>
+                </div>
+            </div>
+        {%endif %}
+    {% endfor %}
+    {% else %}
+        <div class="card bg-dark text-white border border-body-tertiary rounded-3 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">No hay tareas completadas <a type="button" class="btn btn-secondary"<a class="nav-link" href="{% url 'tasksPage' %}">Completa Una tarea</a></h5>
+            </div>
+        </div>
+{% endif %}
+
+</div>
+{% endblock %}

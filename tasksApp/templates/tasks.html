@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="text-center mb-5">Lista de tareas Por hacer</h1>
+
+<style>
+    .mycard:hover{
+        transition: .2s ease-in-out;
+        transform: scale(1.1)  translate(0px, -5px);
+    }
+</style>
+
+<div class="d-grid gap-2 d-md-flex justify-content-md-center">
+
+    {% if tasks %}
+    {% for task in tasks %}
+        {% if task.important %}
+            <div style="width: 350px;" class="mycard card bg-dark text-white border border-body-tertiary rounded-3 shadow-sm">
+                <div class=" card-body">
+                    <h5 class="card-title">Titulo: {{ task.title }}</h5>
+                    <p class="card-text mt-2">{{ task.description }}</p>
+                    <p class="card-text">Creado por: {{ task.user }}</p>
+                    <a href="{% url 'taskDetails' task.id %}" class="btn btn-warning">Ver detalles</a>
+                </div>
+            </div>
+        {% else %}
+            <div style="width: 350px;" class="mycard    card bg-dark text-white border border-body-tertiary rounded-3 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Titulo: {{ task.title }}</h5>
+                    <p class="card-text mt-2">{{ task.description }}</p>
+                    <p class="card-text">Creado por: {{ task.user }}</p>
+                    <a href="{% url 'taskDetails' task.id %}" class="btn btn-secondary">Ver detalles</a>
+                </div>
+            </div>
+        {%endif %}
+    {% endfor %}
+    {% else %}
+        <div class="card bg-dark text-white border border-body-tertiary rounded-3 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">No hay tareas <a type="button" class="btn btn-secondary"<a class="nav-link" href="{% url 'createTask' %}">Crear tarea</a></h5>
+            </div>
+        </div>
+{% endif %}
+
+</div>  
+    
+{% endblock %}

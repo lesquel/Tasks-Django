@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="text-center">Bienvenido a Tasks
+    {% if user.is_authenticated %}
+        ({{user.username}})
+    {% endif %}
+</h1>
+
+<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+     Rem sint voluptate quasi saepe laborum quo ullam illo harum est 
+    reiciendis. Cupiditate, exercitationem facere. Pariatur deleniti tempora dolores totam nihil molestiae.</p>
+
+
+    {% if not user.is_authenticated %}
+    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+        <a type="button" class="btn btn-secondary" href="{% url 'singUp' %}">Registrarse</a>
+        <a type="button" class="btn btn-dark" href="{% url 'loginPage' %}">Iniciar sesión</a>
+    </div>
+    {% else %}    
+    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+        <a type="button" class="btn btn-secondary" href="{% url 'tasksPage' %}">Lista de tareas</a>
+        <a type="button" class="btn btn-secondary" href="{% url 'createTask' %}">Crear tarea</a>
+        <a type="button" class="btn btn-secondary" href="{% url 'tasks_terminadas' %}">Tareas terminadas</a>
+    </div>
+    {% endif %}
+
+{% endblock %}

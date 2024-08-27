@@ -1,0 +1,21 @@
+{% extends 'baseLogin.html' %}
+{% block content %}
+<h1 class="text-center">Regístrate</h1>
+<form method="post" style="max-width: 500px;" method="post" class="m-auto p-4 card card-body bg-dark text-white border border-body-tertiary rounded-3 shadow-sm">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="username" class="form-label">Nombre de usuario</label>
+        <input type="text" class="form-control" id="username" name="username" placeholder="">
+    </div>
+    <div class="mb-3">
+        <label for="password1" class="form-label">Contraseña</label>
+        <input type="password" class="form-control" id="password1" name="password1" placeholder="">
+    </div>
+    <div class="mb-3">
+        <label for="password2" class="form-label">Repetir contraseña</label>
+        <input type="password" class="form-control" id="password2" name="password2" placeholder="">
+    </div>
+    <button type="submit"  class="btn btn-secondary">Regístrate</button>
+    <p class="text-center pt-5">Ya tienes cuenta? <a href="{% url 'loginPage' %}">Iniciar sesión</a></p>
+</form>
+{% endblock %}
